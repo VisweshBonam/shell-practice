@@ -1,7 +1,7 @@
 #!/bin/bash
 
-ConvoName1 = Trump;
-ConvoName2=Mask;
+ConvoName1=$1;
+ConvoName2=$2;
 
 
 echo "$ConvoName1 : hey, $ConvoName2 what are you doing "
