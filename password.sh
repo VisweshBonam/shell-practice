@@ -1,8 +1,8 @@
 #!/bin/bash
 
 
-echo "Enter your Pin : $password"
+echo "Enter your Pin : "
 
-read -s password 
+read -t 5 -s password 
 
 echo "Your password is : $password"
