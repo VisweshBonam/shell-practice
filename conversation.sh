@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ConvoName1=Trump;
+ConvoName1 = Trump;
 ConvoName2=Mask;
 
 
