@@ -1,6 +1,5 @@
 #!/bin/bash
 
-Movies=("Mad" "Pushpa" "Liger")
+movies=("Pushpa" "MAD" "HIT3" "OG");
 
-
-echo "All movie names is : ${Movies[@]}"
+echo "Print First Movie : $movies[0]"
