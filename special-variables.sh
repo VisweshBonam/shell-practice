@@ -12,4 +12,6 @@ echo "Which user is running the script : $USER"
 
 echo "PID of the script : $$"
 
+sleep 10 &
+
 echo "PID of the last command in background : $!"
