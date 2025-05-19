@@ -19,6 +19,7 @@ else
             echo "mysql installed succesfully"
         else
             echo "installation failed"
+            exit 1
         fi
     fi
 fi
