@@ -21,16 +21,7 @@ else
     echo "You are running with root access" | tee -a $LOG_FILE
 fi
 
-# validate functions takes input as exit status, what command they tried to install
-VALIDATE(){
-    if [ $1 -eq 0 ]
-    then
-        echo -e "Installing $2 is ... $G SUCCESS $N" | tee -a $LOG_FILE
-    else
-        echo -e "Installing $2 is ... $R FAILURE $N" | tee -a $LOG_FILE
-        exit 1
-    fi
-}
+
 
 #for package in ${PACKAGES[@]}
 for package in $@
@@ -45,3 +36,14 @@ do
         echo -e "Nothing to do $package... $Y already installed $N" | tee -a $LOG_FILE
     fi
 done
+
+# validate functions takes input as exit status, what command they tried to install
+VALIDATE(){
+    if [ $1 -eq 0 ]
+    then
+        echo -e "Installing $2 is ... $G SUCCESS $N" | tee -a $LOG_FILE
+    else
+        echo -e "Installing $2 is ... $R FAILURE $N" | tee -a $LOG_FILE
+        exit 1
+    fi
+}
