@@ -4,7 +4,7 @@
 
 userId=$(id -u)
 
-PACKAGES=("mysql" "nginx" "nodejs")
+PACKAGES=("mysql" "nginx")
 
 if [ $userId -ne 0 ]; then
     echo "ERROR:: Please run this script with root access"
