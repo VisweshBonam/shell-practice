@@ -13,20 +13,19 @@ else
     echo "You are running with root access"
 fi
 
-for packages in ${PACKAGES[@]}
+for packages in ${PACKAGES[@]}; do
 
-do 
+    dnf list installed $package
 
-dnf list installed $package
+    if [ $? -eq 0 ]; then
+        echo "$package is already installed...Nothing to do"
+    else
+        dnf install $package -y
+        Validate $? "$package"
 
-if [ $? -eq 0 ]; then
-    echo "$package is already installed...Nothing to do"
-else
-    dnf install $package -y
-    Validate $? "$package"
+    fi
 
-fi
-
+done
 
 Validate() {
     if [ $1 -eq 0 ]; then
