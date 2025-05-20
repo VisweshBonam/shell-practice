@@ -12,7 +12,7 @@ N="\e[0m"
 
 mkdir -p $FOLDER_PATH
 
-echo -e "$Y you are logged to mobaxtream at $N  $G $(date) $0 : >> $FILE_PATH 
+echo -e "$Y you are logged to mobaxtream at $N  $G $(date) $0" & >> $FILE_PATH 
 
 
-echo -e "$Y have you install dnf package $N  $G succesfuuly at $(date) $0 : | tee -a $FILE_PATH
+echo -e "$Y have you install dnf package $N  $G succesfuuly at $(date) $0"  | tee -a $FILE_PATH
