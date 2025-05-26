@@ -17,9 +17,9 @@ SCRIPT_NAME="$(echo $0 | cut -d "." -f1)"
 LOG_FILE="$LOG_FOLDER/$SCRIPT_NAME.log"
 SCRIPT_DIR="$PWD"
 
-SOURCE_DIR=$1
-DEST_DIR=$2
-DAYS=${3:-14} # if DAYS are provided that will be considered, otherwise default 14 days
+SOURCE_DIR="$1"
+DESTI_DIR="$2"
+DAYS="${3:-14}"
 
 
 
