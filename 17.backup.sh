@@ -59,6 +59,7 @@ then
 fi
 
 if [ ! -d $DESTI_DIR ]
+then
     echo -e "Destination directory $DESTI_DIR doesn't exsist"
     exit 1
 fi
