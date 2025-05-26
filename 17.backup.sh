@@ -63,5 +63,15 @@ if [ ! -d $DESTI_DIR ]
     exit 1
 fi
 
+FILES=$(find $SCRIPT_DIR -name "*.log" -mtime $DAYS)
+
+if [ ! -z $FILES ]
+then
+    echo -e "Files Found"
+
+else
+    echo -e "You dont have files in $SOURCE_DIR Source Directory"
+    exit 1
+fi
 
 
