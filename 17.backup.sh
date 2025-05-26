@@ -12,7 +12,7 @@ N="\e[0m"
 
 #Logs
 
-LOG_FOLDER="/Var/log/shellpractice-logs"
+LOG_FOLDER="/var/log/shellpractice-logs"
 SCRIPT_NAME="$(echo $0 | cut -d "." -f1)"
 LOG_FILE="$LOG_FOLDER/$SCRIPT_NAME.log"
 SCRIPT_DIR="$PWD"
@@ -25,7 +25,7 @@ DAYS="${3:-14}"
 
 mkdir -p $LOG_FOLDER
 
-if [ UserId -ne 0 ]
+if [ $UserId -ne 0 ]
 then
     echo -e "$R ERROR $N :: Please provide root access"
     exit 1
