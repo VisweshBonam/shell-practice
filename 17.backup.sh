@@ -65,14 +65,40 @@ FILES=$(find $SOURCE_DIR -name "*.log" -mtime +$DAYS)
 
 #check is there any files in the Source Directory
 if [ ! -z "$FILES" ]; then
+
     #if the folder is not empty, zip the files
     echo -e "Files to zip are $FILES"
+
+    #adding time stamp 
     TIME_STAMP="$(date +%F-%H-%M-%S)"
+
+    #zip file format with time stamp
     ZIP_FILE="$DESTI_DIR/app-logs-$TIME_STAMP.zip"
-    echo $FILES | zip -@ "$ZIP_FILE"
+
+    echo $FILES  | zip -@ "$ZIP_FILE" #zip all the files and save in destination directory
+
+    if [ -f $ZIP_FILE  ]
+    then
+        echo -e "Succesfully created zip file"
+
+        while IFS= read -r filepath
+        do
+            echo -e " Deleting the file path $filepath" | tee -a $LOG_FILE
+            rm -rf $filepath
+        done <<< $FILES
+
+        echo -e "log files older than 14 days is deleted"
+    else
+        echo -e "Zip file creation failed "
+        exit 1
+    fi
 
 else
     # If the source directory is empty
     echo -e "You dont have files in $SOURCE_DIR Source Directory"
     exit 1
 fi
+
+
+
+
