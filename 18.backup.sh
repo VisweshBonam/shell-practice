@@ -17,38 +17,51 @@ SOURCE_DIR=$1
 DEST_DIR=$2
 DAYS=${3:-14}
 
-
-
 echo "Scripted started executing at : $(date)"
 
 mkdir -p $LOG_FOLDER
 
-if [ $UserId -ne 0 ]
-then
+if [ $UserId -ne 0 ]; then
     echo -e "$R ERROR $N:: Please access with root user" | tee -a $LOG_FILE
     exit 1
 else
     echo -e "$G You are running with root $N" | tee -a $LOG_FILE
 fi
 
-VALIDATE(){
-    if [ $1 -eq 0 ]
-    then
+VALIDATE() {
+    if [ $1 -eq 0 ]; then
         echo -e "$2 is .....$G Success $N"
     else
         echo -e "$2 is .....$R Failed $N"
         exit 1
-    fi 
+    fi
 }
 
-VALIDATEARG(){
+VALIDATEARG() {
     echo -e "$R USAGE:: $N sh 18-backup.sh <source-dir> <destination-dir> <days(optional)>"
 }
 
-if [ $# -lt 2 ]
-then
+if [ $# -lt 2 ]; then
     VALIDATEARG
 fi
 
+if [ ! -d $SOURCE_DIR ]; then
+    echo -e "$R Source Directory $SOURCE_DIR does not exist. Please check $N"
+    exit 1
+fi
 
+if [ ! -d $DEST_DIR ]; then
+    echo -e "$R Destination Directory $DEST_DIR does not exist. Please check $N"
+    exit 1
+fi
 
+FILES=$(find $SOURCE_DIR -name "*.log" -mtime +$DAYS)
+
+if [ ! -z "$FILES" ]; then
+    echo "Files to zip are: $FILES"
+    TIME_STAMP=$(date +%F-%H-%M-%S)
+    ZIP_FILE="$SOURCE_DIR/app-logs-$TIME_STAMP.zip"
+    echo -e $FILES | zip -@ "$ZIP_FILE"
+else
+    echo -e "No log files found older than 14 days ... $Y SKIPPING $N"
+fi
