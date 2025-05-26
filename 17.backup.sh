@@ -69,6 +69,8 @@ FILES=$(find $SOURCE_DIR -name "*.log" -mtime +$DAYS)
 if [ ! -z "$FILES" ]
 then
     echo -e "Files to zip are $FILES"
+    ZIP_FILE="$DESTI_DIR/app-logs-$(date +%F-%H-%M-%S).zip"
+    echo $Files | zip -@ $ZIP_FILE
     
 
 else
