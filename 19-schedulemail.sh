@@ -5,7 +5,7 @@ DISK_USAGE="$(df -hT | grep -v FileSystem)"
 MAX_USAGE=1
 MSG=""
 
-while IFS= read -r line
+while IFS= read  line
 do
     CONSUMED_PERCENTAGE="$(echo $line | awk '{print $6F}' | cut -d "%" -f1 )"
     CONSUMED_DIR="$(echo $line | awk '{print $7F}')"
