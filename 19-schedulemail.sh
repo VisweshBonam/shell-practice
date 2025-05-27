@@ -12,7 +12,7 @@ do
 
     if [ $CONSUMED_PERCENTAGE -gt $MAX_USAGE ]
     then
-        MSG+= $CONSUMED_DIR is consumed more than 80%
+        MSG+=  is consumed more than 80%
     fi
 done <<< $DISK_USAGE
 echo -e $MSG
