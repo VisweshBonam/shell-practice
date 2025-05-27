@@ -11,7 +11,7 @@ do
     CONSUMED_PERCENTAGE="$(echo $line | awk '{print $6F}' | cut -d "%" -f1 )"
     CONSUMED_DIR="$(echo $line | awk '{print $7F}')"
 
-    if [ $CONSUMED_PERCENTAGE -ge $MAX_USAGE ]
+    if [ $MAX_USAGE -gt $CONSUMED_PERCENTAGE ]
     then
         MSG+= "$CONSUMED_DIR is consumed more than 80%"
     fi
