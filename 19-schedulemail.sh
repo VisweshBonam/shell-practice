@@ -1,18 +1,15 @@
 #!/bin/bash
 
-DISK_USAGE=$(df -hT | grep -v Filesystem)
-DISK_THRESHOLD=1 # in project it will be 75
+DISK_USAGE="$(df -hT | grep -v FileSystem)"
+MAX_USAGE=1
 MSG=""
-IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
 
-while IFS= read line
-do
-    USAGE=$(echo $line | awk '{print $6F}' | cut -d "%" -f1)
-    PARTITION=$(echo $line | awk '{print $7F}')
-    if [ $USAGE -ge $DISK_THRESHOLD ]
-    then
-        MSG+="High Disk Usage on $PARTITION: $USAGE % <br>" #<br> represents HTML new
+while IFS= read -r line; do
+    CONSUMED_PERCENTAGE="$(echo line | awk '{print $6F}' | cut -d "%" -f1)"
+    CONSUMED_DIR="$(echo line | awk '{print $7F}')"
+
+    if [ $CONSUMED_PERCENTAGE -gt $MAX_USAGE ]; then
+        MSG+= echo -e "$CONSUMED_DIR is consumed more than 80%"
     fi
-done <<< $DISK_USAGE
-
+done <<<$DISK_USAGE
 echo $MSG
