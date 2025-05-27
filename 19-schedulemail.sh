@@ -4,6 +4,7 @@
 DISK_USAGE="$(df -hT | grep -v FileSystem)"
 MAX_USAGE=1
 MSG=""
+IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
 
 while IFS= read -r line
 do
@@ -17,3 +18,5 @@ do
 done <<< $DISK_USAGE
 
 echo $MSG
+
+sh mailservice.sh "Devops Team" "Disk UsageWaning" "$IP" "$MSG" "viswesh.bonam@gmail.com" "ALERT-High Disk Usage"
