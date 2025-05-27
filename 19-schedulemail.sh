@@ -14,5 +14,6 @@ do
         MSG+="High Disk Usage on $PARTITION: $USAGE % <br>" #<br> represents HTML new
     fi
 done <<< $DISK_USAGE
+echo -e $MSG
 
 sh mailservice.sh "Devops Team" "Disk UsageWaning" "$IP" "$MSG" "viswesh.bonam@gmail.com" "ALERT-High Disk Usage"
