@@ -61,7 +61,7 @@ if [ ! -z "$FILES" ]; then
     echo "Files to zip are: $FILES"
     TIME_STAMP=$(date +%F-%H-%M-%S)
     ZIP_FILE="$DEST_DIR/app-logs-$TIME_STAMP.zip"
-    echo -e $FILES | tr ' ' '/n' | zip -@ "$ZIP_FILE"
+    echo -e $FILES | tr ' ' '\n' | zip -@ "$ZIP_FILE"
 
     if [ -f $ZIP_FILE ]; then
         echo -e "Successfully created Zip file"
