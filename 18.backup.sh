@@ -61,19 +61,17 @@ if [ ! -z "$FILES" ]; then
     echo "Files to zip are: $FILES"
     TIME_STAMP=$(date +%F-%H-%M-%S)
     ZIP_FILE="$DEST_DIR/app-logs-$TIME_STAMP.zip"
-    find $SOURCE_DIR -name "*.log" -mtime +$DAYS | zip -@ "$ZIP_FILE"
+    echo -e $FILES | tr ' ' '/n' | zip -@ "$ZIP_FILE"
 
-    if [ -f $ZIP_FILE ]
-    then
-         echo -e "Successfully created Zip file"
-         while IFS= read -r filepath
-        do
-           echo "Deleting file: $filepath" | tee -a $LOG_FILE
-           rm -rf $filepath
-        done <<< $FILES
+    if [ -f $ZIP_FILE ]; then
+        echo -e "Successfully created Zip file"
+        while IFS= read -r filepath; do
+            echo "Deleting file: $filepath" | tee -a $LOG_FILE
+            rm -rf $filepath
+        done <<<$FILES
         echo -e "Log files older than $DAYS from source directory removed ... $G SUCCESS $N"
     else
-         echo -e "Zip file creation ... $R FAILURE $N"
+        echo -e "Zip file creation ... $R FAILURE $N"
         exit 1
     fi
 else
