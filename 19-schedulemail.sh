@@ -9,7 +9,7 @@ while IFS= read -r line; do
     CONSUMED_DIR="$(echo line | awk '{print $7F}')"
 
     if [ $CONSUMED_PERCENTAGE -gt $MAX_USAGE ]; then
-        MSG+= echo -e "$CONSUMED_DIR is consumed more than 80%"
+        MSG+= "$CONSUMED_DIR is consumed more than 80%"
     fi
 done <<<$DISK_USAGE
 echo $MSG
