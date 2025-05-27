@@ -17,6 +17,5 @@ do
     fi
 done <<< $DISK_USAGE
 
-echo $MSG
 
 sh mailservice.sh "Devops Team" "Disk UsageWaning" "$IP" "$MSG" "viswesh.bonam@gmail.com" "ALERT-High Disk Usage"
